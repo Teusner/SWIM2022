@@ -1,0 +1,46 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\pagenumbering{gobble}
+\usepackage{verbatim}
+
+% Keywords command
+\providecommand{\keywords}[1] {
+	\small	
+	\textbf{\textit{Keywords---}} #1
+}
+
+\title{Guaranteed sea route monitoring by weather buoys using interval analysis}
+\author{Quentin \textsc{Brateau}$^{1}$, Luc \textsc{Jaulin}$^{1}$  \\
+				\small $^{1}$ENSTA Bretagne, UMR 6285, Lab-STICC, 2 rue François Verny, 29806 Brest CEDEX 09, \textsc{France} \\
+}
+
+\date{}
+
+\begin{document}
+
+	\maketitle
+
+	\begin{abstract}
+
+		The maritime environment is complex and difficult to monitor. It is for instance quite easy for a boat to navigate furtively if it is not visible from the shore. This requires the implementation of tools to detect in a guaranteed way surface vessels that evolve in the marine space. This can have both civilian and military interests. We might like to detect in a guaranteed way if a boat is navigating in a forbidden area, but also to monitor boats and make sure with external sensing measures they will not collide each others.
+		
+		It can be noticed that in their movements the boats produce waves that can reveal their passage. These disturbances are notably detected on the weather buoys which interfere with the measurements. These disturbances are particularly detectable on weather buoys that interfere with the measurements.
+
+		Set methods are very powerful tools to achieve guaranteed proofs. In our case we will use interval analysis which will allow us to enclose the possible set for the surface vessel positions.
+
+		This work will not focus on methods of detecting disturbances on weather buoys, but will assume that the ship's wake is detectable within a time interval. We will focus on meteorological buoys placed around a maritime route that will locate the sailing boats. 
+		
+	\end{abstract}
+
+	\hspace{10pt}
+
+	\keywords{State Estimation, Resilient, Interval Analysis, Control-loop}
+
+	\bibliography{bib/abstract}
+	\bibliographystyle{ieeetr}
+
+\end{document}
