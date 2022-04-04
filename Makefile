@@ -16,7 +16,7 @@ TEX_SRCS := $(wildcard */*.tex)
 dir_guard = @mkdir -p $(@D)
 
 # All recipe
-all: abstract #article
+all: abstract
 
 ### Numeric reports
 # Abstract

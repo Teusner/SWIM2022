@@ -1,46 +1,71 @@
-\documentclass[a4paper]{article}
-\usepackage[margin=25mm]{geometry}
+% LaTeX template for submitting an abstract to  
+%
+%           SWIM 2022
+%           July 19-21, 2022
+%           Hannover, GERMANY
+%
+%% Please use the least number of macros and packages as possible
+%% which will help us parsing your abstracts. Thank you! Additionally, 
+%% please use UTF8 for font encoding!!! The last but not least, please 
+%% do not change the font size and the paper format. 
+%%
+%% Thank you! We are looking forward for your contributions.
+%%
+%% Many thanks to all previous SWIM organizers for allowing us to use
+%% their template as basis for our style file.
+\documentclass[14pt, a4paper]{article}
+
+%% Please use only the following packages. Thank you!
+\usepackage{extsizes}
 \usepackage{amsmath}
-\usepackage{amsfonts}
+\usepackage{amsthm}
 \usepackage{amssymb}
-\usepackage{graphicx}
+\usepackage{url}
+\usepackage[utf8]{inputenc}
 \pagenumbering{gobble}
-\usepackage{verbatim}
+\clearpage
 
-% Keywords command
-\providecommand{\keywords}[1] {
-	\small	
-	\textbf{\textit{Keywords---}} #1
-}
-
-\title{Guaranteed sea route monitoring by weather buoys using interval analysis}
-\author{Quentin \textsc{Brateau}$^{1}$, Luc \textsc{Jaulin}$^{1}$  \\
-				\small $^{1}$ENSTA Bretagne, UMR 6285, Lab-STICC, 2 rue François Verny, 29806 Brest CEDEX 09, \textsc{France} \\
-}
-
-\date{}
+% USER PACKAGES
+\usepackage{gensymb}
+\usepackage[backend=biber,style=ieee,doi=false,isbn=false,url=false,eprint=false]{biblatex}
+\addbibresource{bib/abstract.bib}
 
 \begin{document}
 
-	\maketitle
+	\begin{center}
 
-	\begin{abstract}
+		{\Large\bf Sea route monitoring by weather buoys using interval analysis}
 
-		The maritime environment is complex and difficult to monitor. It is for instance quite easy for a boat to navigate furtively if it is not visible from the shore. This requires the implementation of tools to detect in a guaranteed way surface vessels that evolve in the marine space. This can have both civilian and military interests. We might like to detect in a guaranteed way if a boat is navigating in a forbidden area, but also to monitor boats and make sure with external sensing measures they will not collide each others.
+		\vspace*{0.8cm}
+
+		{\large Quentin \textsc{Brateau}$^{1}$, Luc \textsc{Jaulin}$^{1}$}
+
+		\bigskip
+
+		{\small $^{1}$ENSTA Bretagne, UMR 6285, Lab-STICC, \\
+		2 rue François Verny, 29806 Brest CEDEX 09, \textsc{France} \\
+		\texttt{quentin.brateau@ensta-bretagne.org}
+		}
+
+	\end{center}
+
+	\bigskip
+
+	{\noindent\bf Keywords:} Detection, Surface Vessels, Weather Buoys, Set inversion, Interval Analysis
+
+	\subsection*{Introduction}
+		The maritime environment is complex and difficult to monitor. It is quite easy for a boat to navigate furtively if it is not visible from the shore. For instance, it is possible to practice illegal fishing if you do not meet anyone on the water, even if today innovative methods are developed to counter these practices~\cite{doi:10.1073/pnas.1915499117}. Ocean monitoring then requires the implementation of tools to detect in a guaranteed way surface vessels that evolve in the marine space. This can be used to detect enemy ships sailing in unauthorized areas, but also to know the ship's position and manage the maritime traffic.
+
+	\subsection*{Basic properties}
+		We can notice that the movement of the boats creates a wake that betrays their presence. A mathematical model shows that wake's angle is constant regardless of the boat and is $\alpha = \arcsin\left(\frac{1}{3}\right) \approx 19.5 \degree$~\cite{thomson1887ship, stoker1992water}. Recent studies have established a more accurate model that takes into account the decrease of the wake angle with increasing Froude number~\cite{Rabaud_2013}.
 		
-		It can be noticed that in their movements the boats produce waves that can reveal their passage. These disturbances are notably detected on the weather buoys which interfere with the measurements. These disturbances are particularly detectable on weather buoys that interfere with the measurements.
+		There is all over the world set up weather buoys at sea to monitor wind, currents, temperature and water height~\footnote{\url{https://www.ndbc.noaa.gov/}}. Disturbances on water height induced by sailing surface vessels can then be detected on the weather buoys which interfere with the measurements, and then, we can obtain information on the location of the boat. By combining the data from a network of buoys, we are able to estimate the position of the boat.
 
-		Set methods are very powerful tools to achieve guaranteed proofs. In our case we will use interval analysis which will allow us to enclose the possible set for the surface vessel positions.
-
-		This work will not focus on methods of detecting disturbances on weather buoys, but will assume that the ship's wake is detectable within a time interval. We will focus on meteorological buoys placed around a maritime route that will locate the sailing boats. 
+	\subsection*{Main results}
+		These works are not focused on methods about disturbances detection on weather buoys, but assume that the ship's wake is detectable within a time interval. These buoys are placed around a maritime route to enclose ship's state using an accurate wake model and set inversion algorithms. We are then able to retrieve the number of boats as well as to see their trajectories with enough buoys.
 		
-	\end{abstract}
+	\printbibliography[title={References},heading=subbibliography]
 
-	\hspace{10pt}
-
-	\keywords{State Estimation, Resilient, Interval Analysis, Control-loop}
-
-	\bibliography{bib/abstract}
-	\bibliographystyle{ieeetr}
+	\medskip
 
 \end{document}
