@@ -25,16 +25,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="7.9195959"
-     inkscape:cx="110.67484"
-     inkscape:cy="1043.5864"
+     inkscape:zoom="8"
+     inkscape:cx="86.094257"
+     inkscape:cy="1044.8119"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1848"
      inkscape:window-height="1016"
-     inkscape:window-x="1992"
-     inkscape:window-y="371"
+     inkscape:window-x="1752"
+     inkscape:window-y="228"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata5">
@@ -44,7 +44,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -136,5 +136,29 @@
        transform="matrix(0.43310771,0.02850971,-0.01976152,0.3002089,25.68722,18.405722)"
        inkscape:transform-center-x="-0.20324764"
        inkscape:transform-center-y="-0.029052722" />
+    <circle
+       style="opacity:1;fill:#e74c3c;fill-opacity:1;fill-rule:nonzero;stroke:#e74c3c;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path825"
+       cx="33.038067"
+       cy="20.555819"
+       r="0.15000001" />
+    <circle
+       style="opacity:1;fill:#e74c3c;fill-opacity:1;fill-rule:nonzero;stroke:#e74c3c;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path825-3"
+       cx="31.976501"
+       cy="17.33"
+       r="0.15000001" />
+    <circle
+       style="opacity:1;fill:#e74c3c;fill-opacity:1;fill-rule:nonzero;stroke:#e74c3c;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path825-6"
+       cx="23.999969"
+       cy="21.593786"
+       r="0.15000001" />
+    <circle
+       style="opacity:1;fill:#e74c3c;fill-opacity:1;fill-rule:nonzero;stroke:#e74c3c;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path825-6-7"
+       cx="24.409224"
+       cy="24.078558"
+       r="0.15000001" />
   </g>
 </svg>
