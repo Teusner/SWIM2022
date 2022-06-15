@@ -1,7 +1,10 @@
 \documentclass{beamer}
+
 \usepackage[scale=2]{ccicons}
 \usepackage{stmaryrd}
+\usepackage{graphicx}
 
+% Beamer configuration
 \usetheme[sectionpage=progressbar, numbering=counter, progressbar=frametitle]{metropolis}
 
 \usepackage{pgfplots}
@@ -36,6 +39,21 @@
     \section{Introduction}
 
         \begin{frame}{Introduction}
+            \begin{minipage}{0.55\textwidth}
+                \begin{block}{Problem statement}
+                    Estimate the state of multiples sub-systems governed by the same evolution equation.
+                \end{block}
+                \begin{block}{Measurements}
+                    Sub-systems are sensed by independant sensors at different times. The number of sensors can be significant.
+                \end{block}
+            \end{minipage}
+            \hfill
+            \begin{minipage}{0.4\textwidth}
+                \begin{figure}
+                    \includegraphics[width=\textwidth]{build/imgs/introduction.pdf}
+                    \caption{Multiple systems sensed by multiples sensors}
+                \end{figure}
+            \end{minipage}
         \end{frame}
 
     \section{Formalism}
