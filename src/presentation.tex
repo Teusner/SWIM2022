@@ -61,16 +61,16 @@
 
     \section{Formalism}
 
-        \begin{frame}{State eqaution}
+        \begin{frame}{State equation}
             \begin{block}<1->{Evolution equation}
-                $\forall n \in \mathbb{N}$ the number of systems, $\forall i \in \llbracket 1, n\rrbracket$, $\mathbf{x_i}$ is the state of the $i^{th}$ system such that
+                $\forall l \in \mathbb{N}$ the number of sub-systems, $\forall i \in \llbracket 1, l\rrbracket$, $\mathbf{x_i} \in \mathbb{R}^n$ is the state of the $i^{th}$ system such that
                 \begin{equation}
                     \dot{\mathbf{x_i}} = f(\mathbf{x_i})
                 \end{equation}
             \end{block}
 
             \begin{block}<2->{Measurement equation}
-                $\forall m \in \mathbb{N}$ the number of sensors, $\forall k \in \llbracket 1, m\rrbracket$, $\exists j \in \llbracket 1, n\rrbracket$ such that
+                $\forall m \in \mathbb{N}$ the number of sensors, $\forall k \in \llbracket 1, m\rrbracket$, $\exists j \in \llbracket 1, l\rrbracket$ such that
                 \begin{equation}
                     g^k(\mathbf{x_i}(t_j)) \in \mathbb{Y}_j^k
                 \end{equation}
@@ -79,11 +79,11 @@
 
         \begin{frame}{Combinatorial approach}
             \begin{block}<1->{Combinatorial approach}
-                $\forall n \in \mathbb{N}$ the number of boats, $\forall m \in \mathbb{N}$ the number of sensors, there is $d = n^m$ detections.
+                $\forall l \in \mathbb{N}$ the number of sub-systems, $\forall m \in \mathbb{N}$ the number of sensors, there is $d = l^m$ detections.
             \end{block}
             \begin{exampleblock}<2->{Example}
-                With $n = 5$ boats and $m = 20$ sensors,
-                $$d = n^m = 5^{20} = 9.5e^{13}$$
+                With $l = 5$ boats and $m = 20$ sensors,
+                $$d = l^m = 5^{20} = 9.5e^{13}$$
             \end{exampleblock}
         \end{frame}
 
@@ -93,11 +93,11 @@
                     \centering
                     Any detection could be produced by any sub-system.
                 \end{quote}
-                $\forall n \in \mathbb{N}$ the number of boats, $\forall m \in \mathbb{N}$ the number of sensors, there is $d = n \times m$ detections.
+                $\forall l \in \mathbb{N}$ the number of boats, $\forall m \in \mathbb{N}$ the number of sensors, there is $d = l \times m$ detections.
             \end{block}
             \begin{exampleblock}<2->{Example}
-                With $n = 5$ boats and $m = 20$ sensors,
-                $$d = n \times m = 5 \times 20 = 120$$
+                With $l = 5$ boats and $m = 20$ sensors,
+                $$d = l \times m = 5 \times 20 = 120$$
             \end{exampleblock}
         \end{frame}
 
@@ -105,11 +105,11 @@
             \begin{block}<1->{Sensor detection set}
                 $\forall k \in \llbracket 1, m\rrbracket$, $\mathbb{Y}^k$ is the detection set of the $k^{th}$ sensor such that
                 \begin{equation}
-                    \mathbb{Y}^k = \bigcup_{j \in \llbracket 1, m\rrbracket} \mathbb{Y}_j^k
+                    \mathbb{Y}^k = \bigcup_{j \in \llbracket 1, l\rrbracket} \mathbb{Y}_j^k
                 \end{equation}
             \end{block}
             \begin{block}<2->{Detection space}
-                $\mathbb{Y} \in \mathbb{R}^k$ is the detection set of all the systems such that
+                $\mathbb{Y} \in \mathbb{R}^m$ is the detection set of all the systems such that
                 \begin{equation}
                     \mathbb{Y} = \mathbb{Y}^1 \times \dots \times \mathbb{Y}^m
                 \end{equation}
@@ -119,13 +119,13 @@
         \begin{frame}{Example}
             \begin{exampleblock}<1->{Example}
                 Assuming that $n = 3$, $m = 2$, and
-                $$\forall k \in \llbracket 1, m\rrbracket, \;  \forall j \in \llbracket 1, m\rrbracket, \quad \mathbb{Y}_k^j \in \mathbb{R}$$
+                $$\forall k \in \llbracket 1, m\rrbracket, \;  \forall j \in \llbracket 1, l\rrbracket, \quad \mathbb{Y}_j^k \in \mathbb{R}$$
             \end{exampleblock}
             \begin{exampleblock}<2->{Detection space}
                 Then $\mathbb{Y} \in \mathbb{R}^2$ and
                 \begin{eqnarray}
                     \mathbb{Y} & = & \mathbb{Y}^1 \times \mathbb{Y}^2 \\
-                    & = & \left(\mathbb{Y}_1^1 \cup \mathbb{Y}_2^1 \cup \mathbb{Y}_3^1\right) \times \left(\mathbb{Y}_1^1 \cup \mathbb{Y}_2^1 \cup \mathbb{Y}_3^1\right)
+                    & = & \left(\mathbb{Y}_1^1 \cup \mathbb{Y}_2^1 \cup \mathbb{Y}_3^1\right) \times \left(\mathbb{Y}_1^2 \cup \mathbb{Y}_2^2 \cup \mathbb{Y}_3^2\right)
                 \end{eqnarray}
             \end{exampleblock}
         \end{frame}
@@ -135,11 +135,11 @@
                 \begin{table}
                     \begin{tabular}{@{} rcc @{}}
                         \toprule
-                        & $s_1$ & $s_2$ \\
+                        & $k=1$ & $k=2$ \\
                         \midrule
-                        $\mathbb{Y}_1$ & $\lbrack0.97, 1.97\rbrack$ & $\lbrack1.51, 2.51\rbrack$  \\
-                        $\mathbb{Y}_2$ & $\lbrack3.18, 4.18\rbrack$ & $\lbrack4.01, 1.01\rbrack$ \\
-                        $\mathbb{Y}_3$ & $\lbrack6.62, 7.62\rbrack$ & $\lbrack6.47, 6.47\rbrack$ \\
+                        $\mathbb{Y}_1^k$ & $\lbrack0.97, 1.97\rbrack$ & $\lbrack1.51, 2.51\rbrack$  \\
+                        $\mathbb{Y}_2^k$ & $\lbrack3.18, 4.18\rbrack$ & $\lbrack4.01, 1.01\rbrack$ \\
+                        $\mathbb{Y}_3^k$ & $\lbrack6.62, 7.62\rbrack$ & $\lbrack6.47, 6.47\rbrack$ \\
                         \bottomrule
                     \end{tabular}
                     \caption{Detection times}
@@ -158,7 +158,7 @@
             \begin{block}<1->{Set inversion}
                 The state of the system is estimated using set inversion algorithm.
                 \begin{equation}
-                    \mathbb{X} = \lbrace x \in \mathbb{R}^k \mid\ f(x) \in \mathbb{Y}\rbrace
+                    \mathbb{X} = \lbrace \mathbf{x} \in \mathbb{R}^n \mid\ g(\mathbf{x}) \in \mathbb{Y}\rbrace
                 \end{equation}
             \end{block}
         \end{frame}
