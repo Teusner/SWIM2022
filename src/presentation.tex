@@ -4,6 +4,7 @@
 \usepackage{stmaryrd}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage{gensymb}
 
 % Beamer configuration
 \usetheme[sectionpage=progressbar, numbering=counter, progressbar=frametitle]{metropolis}
@@ -165,18 +166,19 @@
     \section{Application: Sea route monitoring}
 
         \begin{frame}{Boat wake}
-            \begin{minipage}{0.45\textwidth}
+            \centering
+            \begin{minipage}{0.6\textwidth}
+                \begin{block}{Wake's angle}
+                    \begin{equation}
+                        \alpha = \arcsin\left(\frac{1}{3}\right) \approx 19.47 \degree
+                    \end{equation}
+                \end{block}
+                \vspace{0.2cm}
                 \begin{figure}
                     \centering
-                    \includegraphics[width=\textwidth]{imgs/motorboat}
+                    \includegraphics[width=\textwidth,trim={0 0 17cm 14cm},clip]{imgs/motorboat}
                     \caption{Boat and wake}
                 \end{figure}
-            \end{minipage}
-            \hfill
-            \begin{minipage}{0.5\textwidth}
-                \begin{equation}
-                    f(x) = t = \frac{1}{v} \left(\frac{\Delta y}{tan(\alpha)} - \Delta x\right)
-                \end{equation}
             \end{minipage}
         \end{frame}
 
