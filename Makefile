@@ -4,6 +4,7 @@ ABSTRACT_DIR = abstract
 PRESENTATION_DIR = presentation
 ARTICLE_DIR = article
 IMGS_DIR = imgs
+VIDEOS_DIR = videos
 
 # Directory path combining
 ABSTRACT_BUILD_DIR = $(BUILD_DIR)/$(ABSTRACT_DIR)
@@ -18,7 +19,7 @@ TEX_SRCS := $(wildcard */*.tex)
 dir_guard = @mkdir -p $(@D)
 
 # All recipe
-all: abstract presentation figures
+all: abstract presentation figures videos
 
 ### Numeric reports
 # Abstract
@@ -30,9 +31,9 @@ $(ABSTRACT_BUILD_DIR)/abstract.pdf: src/abstract.tex
 
 presentation: $(PRESENTATION_BUILD_DIR)/presentation.pdf
 
-$(PRESENTATION_BUILD_DIR)/presentation.pdf: src/presentation.tex figures
+$(PRESENTATION_BUILD_DIR)/presentation.pdf: src/presentation.tex figures videos
 	$(dir_guard)
-	latexmk -pdfxe -shell-escape -output-directory=$(PRESENTATION_BUILD_DIR) $<
+	latexmk -pdflatex -shell-escape -output-directory=$(PRESENTATION_BUILD_DIR) $<
 
 # Figures
 IMGS_SVG := $(wildcard ${IMGS_DIR}/*.svg)
@@ -43,6 +44,16 @@ figures: $(IMGS_PDF)
 $(IMGS_BUILD_DIR)/%.pdf: $(IMGS_DIR)/%.svg
 	$(dir_guard)
 	inkscape --export-pdf=$@ --export-area-drawing --file=$<
+
+# Videos
+VIDEOS_SRC := $(wildcard ${VIDEOS_DIR}/*.mp4)
+VIDEOS_DST := $(VIDEOS_SRC:${VIDEOS_DIR}/%.mp4=${PRESENTATION_BUILD_DIR}/%.mp4)
+
+videos: $(VIDEOS_DST)
+
+$(PRESENTATION_BUILD_DIR)/%.mp4: $(VIDEOS_DIR)/%.mp4
+	$(dir_guard)
+	cp -f $< $@
 
 # Clean recipe
 clean:

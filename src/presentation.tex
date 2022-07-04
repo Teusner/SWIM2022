@@ -5,6 +5,8 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{gensymb}
+\usepackage{multimedia}
+\usepackage{hyperref}
 
 % Beamer configuration
 \usetheme[sectionpage=progressbar, numbering=counter, progressbar=frametitle]{metropolis}
@@ -59,6 +61,35 @@
             \end{minipage}
         \end{frame}
 
+        \begin{frame}{Introduction}
+            \begin{minipage}[b]{0.55\textwidth}
+                \begin{block}<1->{Sea route monitoring}
+                    Many applications
+                    \begin{itemize}
+                        \item Traffic safety
+                        \item Surveillance operations
+                        \item Intruder detection
+                    \end{itemize}
+                \end{block}
+                \begin{block}<2->{Weather buoys}
+                    \begin{itemize}
+                        \item Deployed all over the world\footnotemark[1]
+                        \item Disturbed by boat's wake
+                    \end{itemize}
+                \end{block}
+            \end{minipage}
+            \hfill
+            \begin{minipage}[b]{0.4\textwidth}
+                \onslide<2->
+                \begin{figure}
+                    \includegraphics[width=0.8\textwidth, trim={0, 50, 0, 50}, clip]{imgs/buoy}
+                    \caption{Weather buoy - NOAA\footnotemark[1]}
+                \end{figure}
+            \end{minipage}
+
+            \footnotetext[1]{{\url{https://www.ndbc.noaa.gov/}}}
+        \end{frame}
+
     \section{Formalism}
 
         \begin{frame}{State equation}
@@ -83,16 +114,24 @@
             \end{block}
             \begin{exampleblock}<2->{Example}
                 With $l = 5$ boats and $m = 20$ sensors,
-                $$d = l^m = 5^{20} = 9.5e^{13}$$
+                $$d = l^m = 5^{20} \simeq 9.5e^{13}$$
             \end{exampleblock}
         \end{frame}
 
         \begin{frame}{Proposed approach}
+            \begin{block}<1->{\alert{Rules}}
+                \begin{itemize}
+                    \item Any detection could be produced by any sub-system.
+                    \item Estimate possible states for all sub-systems at once.
+                \end{itemize}
+            \end{block}
+            \begin{block}<3->{Advantage}
+                Let us process unions of all measurements for a sensor as one set and this problem is no longer a combinatorial problem
+            \end{block}
+        \end{frame}
+
+        \begin{frame}{Proposed approach}
             \begin{block}<1->{Proposed approach}
-                \begin{quote}
-                    \centering
-                    Any detection could be produced by any sub-system.
-                \end{quote}
                 $\forall l \in \mathbb{N}$ the number of boats, $\forall m \in \mathbb{N}$ the number of sensors, there is $d = l \times m$ detections.
             \end{block}
             \begin{exampleblock}<2->{Example}
@@ -191,7 +230,7 @@
             \begin{block}<2->{State equation}
                 \begin{eqnarray}
                     f:& \mathbf{x_i} &\mapsto (v_i.dt, 0, 0)^T \\
-                    g^k:& \mathbf{x_i}  &\mapsto \frac{1}{v_i} \left(\frac{y_i - y^k}{tan(\alpha)} - (x_i - x^k)\right)
+                    g^k:& \mathbf{x_i}  &\mapsto \frac{1}{v_i} \left(\frac{\lvert y_i - y^k \rvert}{tan(\alpha)} - (x_i - x^k)\right)
                 \end{eqnarray}
             \end{block}
         \end{frame}
@@ -229,11 +268,32 @@
         \end{frame}
 
         \begin{frame}{Causal approach}
-            
+            \begin{figure}
+                \centering
+                \href{run:causal.mp4?autostart}{\includegraphics[width=\textwidth]{imgs/causal_cover}}
+                \caption{Causal simulation}
+            \end{figure}
+        \end{frame}
+
+        \begin{frame}{Causal approach - Focus}
+            \begin{figure}
+                \centering
+                \begin{overprint}
+                    \onslide<1>
+                        \href{run:causal.mp4?autostart&loop&start=7&stop=10}{\includegraphics[width=\textwidth]{imgs/causal_cover}}
+                    \onslide<2>
+                        \href{run:causal.mp4?autostart&loop&start=45&stop=50}{\includegraphics[width=\textwidth]{imgs/causal_cover}}
+                \end{overprint}
+                \caption{Causal simulation - Focus}
+            \end{figure}
         \end{frame}
 
         \begin{frame}{Acausal approach}
-            
+            \begin{figure}
+                \centering
+                \href{run:acausal.mp4?autostart}{\includegraphics[width=\textwidth]{imgs/acausal_cover}}
+                \caption{Acausal simulation}
+            \end{figure}
         \end{frame}
 
     \section{Conclusion}
