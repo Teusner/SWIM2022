@@ -33,7 +33,7 @@ presentation: $(PRESENTATION_BUILD_DIR)/presentation.pdf
 
 $(PRESENTATION_BUILD_DIR)/presentation.pdf: src/presentation.tex figures videos
 	$(dir_guard)
-	latexmk -pdflatex -shell-escape -output-directory=$(PRESENTATION_BUILD_DIR) $<
+	latexmk -pdfxe -shell-escape -output-directory=$(PRESENTATION_BUILD_DIR) $<
 
 # Figures
 IMGS_SVG := $(wildcard ${IMGS_DIR}/*.svg)
@@ -46,12 +46,21 @@ $(IMGS_BUILD_DIR)/%.pdf: $(IMGS_DIR)/%.svg
 	inkscape --export-pdf=$@ --export-area-drawing --file=$<
 
 # Videos
-VIDEOS_SRC := $(wildcard ${VIDEOS_DIR}/*.mp4)
-VIDEOS_DST := $(VIDEOS_SRC:${VIDEOS_DIR}/%.mp4=${PRESENTATION_BUILD_DIR}/%.mp4)
+videos: $(PRESENTATION_BUILD_DIR)/causal.mp4 $(PRESENTATION_BUILD_DIR)/acausal.mp4 ${PRESENTATION_BUILD_DIR}/focus_1.mp4 ${PRESENTATION_BUILD_DIR}/focus_2.mp4
 
-videos: $(VIDEOS_DST)
+$(PRESENTATION_BUILD_DIR)/focus_1.mp4 : $(VIDEOS_DIR)/causal.mp4
+	$(dir_guard)
+	/usr/bin/ffmpeg -ss 7 -i $< -c:v libx265 -crf 28 -t 3 $@
 
-$(PRESENTATION_BUILD_DIR)/%.mp4: $(VIDEOS_DIR)/%.mp4
+$(PRESENTATION_BUILD_DIR)/focus_2.mp4 : $(VIDEOS_DIR)/causal.mp4
+	$(dir_guard)
+	/usr/bin/ffmpeg -ss 45 -i $< -c:v libx265 -crf 28 -t 5 $@
+
+$(PRESENTATION_BUILD_DIR)/causal.mp4: $(VIDEOS_DIR)/causal.mp4
+	$(dir_guard)
+	cp -f $< $@
+
+$(PRESENTATION_BUILD_DIR)/acausal.mp4: $(VIDEOS_DIR)/acausal.mp4
 	$(dir_guard)
 	cp -f $< $@
 
