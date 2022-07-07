@@ -36,6 +36,23 @@
 \author{Quentin Brateau}
 \institute{ENSTA Bretagne}
 
+\titlegraphic{
+    \centering
+    \begin{tabular}{lllll}
+        \href{https://www.defense.gouv.fr/aid}{\includegraphics[height=0.6cm]{imgs/logo_aid}} &
+        \href{https://www.gdr-robotique.org/}{\includegraphics[height=0.6cm]{imgs/logo_gdr}} &
+        \href{https://www.ensta-bretagne.fr/fr/}{\includegraphics[height=0.6cm]{imgs/logo_ensta}} &
+        \href{https://labsticc.fr/fr}{\includegraphics[height=0.6cm]{imgs/logo_labsticc}} &
+        \href{https://www.ensta-bretagne.fr/robex/}{\includegraphics[height=0.6cm]{imgs/logo_robex}}
+    \end{tabular}
+}
+
+\addtobeamertemplate{frametitle}{}{%
+    \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north east,yshift=2pt] at (current page.north east) {\includegraphics[height=0.9cm]{imgs/logo_ensta_bw}};
+    \end{tikzpicture}
+}
+
 \begin{document}
 
     \maketitle
@@ -266,10 +283,25 @@
                     \end{eqnarray}
                 \end{block}
             \end{frame}
-        
-        \subsection{Example single boat}
 
-            \begin{frame}{Example single boat}
+            \begin{frame}{Assumptions}
+                \begin{block}<1->{Boat's state}
+                    We will consider a state space, such that
+                    \begin{equation}
+                        \forall i \in \llbracket 1, n\rrbracket, \quad \begin{cases}x_i \in [x_{min}, x_{max}] \\ y_i \in [y_{min}, y_{max}] \\ v_i \in [-v_{max}, -v_{min}] \cup [v_{min}, v_{max}] \end{cases}
+                    \end{equation}
+                \end{block}
+                \begin{block}<2->{Sensor's data}
+                    \begin{itemize}
+                        \item Causal simulation
+                        \item Acausal simulation
+                    \end{itemize}
+                \end{block}
+            \end{frame}
+        
+        \subsection{Example: single sensor and single boat}
+
+            \begin{frame}{Example: single sensor and single boat}
                 \begin{minipage}{0.45\textwidth}
                     \begin{figure}
                             \includegraphics[width=\textwidth]{imgs/forward}
@@ -285,9 +317,9 @@
                 \end{minipage}
             \end{frame}
 
-        \subsection{Example two sensors}
+        \subsection{Example: two sensors and three boats}
 
-            \begin{frame}{Example two sensors}
+            \begin{frame}{Example: two sensors and three boats}
                 \begin{minipage}{0.45\textwidth}
                     \begin{figure}
                             \includegraphics[width=\textwidth]{imgs/ex_detection_space}
@@ -347,11 +379,27 @@
                     \begin{block}<1->{Proposed approach}
                         Consider the set of measurements together to estimate the state of sub-systems at once.
                     \end{block}
-                    \begin{block}<2->{Advantages}
+                    \begin{block}<2->{Benefits}
                         Deal with \textbf{large-scale} problems without combinatorial complexity.
                     \end{block}
-                    \begin{block}<3->{Drawbacks}
+                    \begin{block}<3->{Limitations}
                         No individual state estimation for each sub-systems and the result possibly contains outliers.
+                    \end{block}
+                \end{minipage}
+            \end{frame}
+
+        \subsection{Outlook}
+
+            \begin{frame}{Outlook}
+                \centering
+                \begin{minipage}{0.8\textwidth}
+                    \begin{block}{Further work}
+                        \vspace{0.25cm}
+                        \begin{itemize}
+                            \item Count the number of boats
+                            \item Take off associated measurements related to a sub-system
+                            \item Characterize the set of outliers to hide sub-systems from sensors
+                        \end{itemize}
                     \end{block}
                 \end{minipage}
             \end{frame}
