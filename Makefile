@@ -19,7 +19,7 @@ TEX_SRCS := $(wildcard */*.tex)
 dir_guard = @mkdir -p $(@D)
 
 # All recipe
-all: abstract presentation figures videos
+all: abstract presentation figures videos manim
 
 ### Numeric reports
 # Abstract
@@ -31,7 +31,7 @@ $(ABSTRACT_BUILD_DIR)/abstract.pdf: src/abstract.tex
 
 presentation: $(PRESENTATION_BUILD_DIR)/presentation.pdf
 
-$(PRESENTATION_BUILD_DIR)/presentation.pdf: src/presentation.tex figures videos
+$(PRESENTATION_BUILD_DIR)/presentation.pdf: src/presentation.tex figures videos manim
 	$(dir_guard)
 	latexmk -pdfxe -shell-escape -output-directory=$(PRESENTATION_BUILD_DIR) $<
 
@@ -63,6 +63,19 @@ $(PRESENTATION_BUILD_DIR)/causal.mp4: $(VIDEOS_DIR)/causal.mp4
 $(PRESENTATION_BUILD_DIR)/acausal.mp4: $(VIDEOS_DIR)/acausal.mp4
 	$(dir_guard)
 	cp -f $< $@
+
+# Manim
+manim: $(PRESENTATION_BUILD_DIR)/introduction.mp4 $(IMGS_BUILD_DIR)/introduction.png
+
+$(PRESENTATION_BUILD_DIR)/introduction.mp4 : scripts/main.py
+	$(dir_guard)
+	manim -qh -r 1000,1000 $< introduction
+	cp -f build/manim/videos/main/1000p60/introduction.mp4 $@
+
+$(IMGS_BUILD_DIR)/introduction.png : scripts/main.py
+	$(dir_guard)
+	manim -sqh -r 1000,1000 $< introduction
+	cp -f build/manim/images/main/introduction_ManimCE_v0.15.2.png $@
 
 # Clean recipe
 clean:

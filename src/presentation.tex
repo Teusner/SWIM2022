@@ -56,6 +56,116 @@
 \begin{document}
 
     \maketitle
+    
+    \section{Time delayed detection}
+
+        \subsection{Introduction}
+
+            \begin{frame}{Introduction}
+                \begin{minipage}{0.45\textwidth}
+                    \begin{block}<1->{Problem statement}
+                        Estimate the state of a system using time delayed measurements.
+                    \end{block}
+                    \begin{block}<2->{Assumptions}
+                        The system emits signals at unkown time $t_i$ which are sensed at known time $t_j$.
+                    \end{block}
+                \end{minipage}
+                \hfill
+                \begin{minipage}{0.5\textwidth}
+                    \begin{overprint}
+                        \onslide<3->
+                            \begin{figure}
+                                \href{run:introduction.mp4?autostart&loop}{\includegraphics[width=\textwidth]{build/imgs/introduction}}
+                                \caption{Time delayed measurement on a system}
+                            \end{figure}
+                    \end{overprint}
+                \end{minipage}
+            \end{frame}
+
+        \subsection{Formalism}
+
+            \begin{frame}{State equation}
+                \begin{block}<1->{Evolution equation}
+                    $\forall \mathbf{x} \in \mathcal{S}$ the state of the system, $\forall t \in \mathbb{R}$
+                    \begin{equation}
+                        \dot{\mathbf{x}}(t) = f(\mathbf{x}(t), t)
+                    \end{equation}
+                \end{block}
+
+                \begin{block}<2->{Measurement equation}
+                    $\forall t_j \in \mathbb{R}$, $\exists t_i \in \mathbb{R}$ such that
+                    \begin{equation}
+                        g(\mathbf{x}(t_i), t_i) \in \mathbb{Y}_{t_j}
+                    \end{equation}
+                \end{block}
+            \end{frame}
+
+            \begin{frame}{Flow function}
+                \begin{block}<1->{Definition}
+                    The flow function $\varphi$ is a mapping from $\mathcal{S} \times \mathcal{T} \mapsto \mathcal{S}$ such that
+                    \begin{eqnarray}
+                        \varphi(\mathbf{x}(t),0) &=& \mathbf{x}(t) \\
+                        \varphi(\varphi(\mathbf{x}(t),t_1),t_2) &=& \varphi(\mathbf{x}(t),t_1+t_2)
+                    \end{eqnarray}
+                \end{block}
+                \begin{block}<2->{Property}
+                    From the initial state $\mathbf{x_0} \in \mathcal{S}$, $\forall t \in \mathbb{R}$
+                    \begin{eqnarray}
+                        \varphi(\mathbf{x_0},t) &=& \mathbf{x}(t) \\
+                        \varphi(\mathbf{x}(t),-t) &=& \mathbf{x}_0
+                    \end{eqnarray}
+                \end{block}
+            \end{frame}
+
+            \begin{frame}{State estimation}
+                \begin{block}<1->{Detection set}
+                    $\mathbb{D}_{t_j}$ is the set of compatible state with measurement at $t_j$ such that $\forall t_j \in \mathbb{R}$
+                    \begin{eqnarray}
+                        \mathbb{D}_{t_j} = \{ (\mathbf{x}, t_i) \in \mathcal{S} \times \mathcal{T} \mid g(\mathbf{x}(t_i), t_i, t_j) = 0\}
+                    \end{eqnarray}
+                \end{block}
+
+                \begin{block}<2->{Initial state estimation}
+                    Using the \textbf{flow function}, $\mathbb{X}_0$ is the estimated state of the system
+                    \begin{eqnarray}
+                        \mathbb{X}_0 = \{ \varphi(\mathbf{x}(t_i), -t_i) = \mathbf{x_0} \in \mathcal{S}, \forall (\mathbf{x}, t_i) \in \mathbb{D}_{t_j} \}
+                    \end{eqnarray}
+                \end{block}
+            \end{frame}
+    
+    \section{Application: Boat wakes}
+
+            \begin{frame}{Application: Boat's wakes}
+                \begin{block}<1->{Boat's state}
+                    The system is a boat moving straight ahead along the x-axis
+                    $$\mathbf{x} = (x, y, v)^T$$ 
+                \end{block}
+                \begin{block}<2->{State space assumptions}
+                    \begin{equation}
+                    \begin{cases}x \in [x_{min}, x_{max}] \\ y \in [y_{min}, y_{max}] \\ v \in [-v_{max}, -v_{min}] \cup [v_{min}, v_{max}] \end{cases}
+                    \end{equation}
+                \end{block}
+            \end{frame}
+
+            \begin{frame}{State equations and flow function}
+                \begin{block}<1->{Evolution equation and flow function}
+                    \begin{eqnarray}
+                        f:& \mathbf{x} &\mapsto (v.dt, 0, 0)^T \\
+                        \varphi:& \mathbf{x}, t &\mapsto (x + v.t, y, v)^T
+                    \end{eqnarray}
+                \end{block}
+            \end{frame}
+
+            
+
+            % \begin{frame}{Formalism}
+            %     \begin{figure}
+            %         \centering
+            %         \includegraphics[width=0.6\textwidth]{build/imgs/space_time}
+            %         \caption{Space time state estimation}
+            %     \end{figure}
+            % \end{frame}
+
 
     \section{Introduction}
 
@@ -71,45 +181,18 @@
                     \end{block}
                 \end{minipage}
                 \hfill
-                \onslide<3->
                 \begin{minipage}{0.4\textwidth}
-                    \begin{figure}
-                        \includegraphics[width=\textwidth]{build/imgs/introduction}
-                        \caption{Multiple systems sensed by multiples sensors}
-                    \end{figure}
+                    \begin{overprint}
+                        \onslide<3->
+                            \begin{figure}
+                                \href{run:introduction.mp4?autostart&loop}{\includegraphics[width=\textwidth]{build/imgs/introduction}}
+                                \caption{System detected by a sensor at a later time}
+                            \end{figure}
+                    \end{overprint}
                 \end{minipage}
             \end{frame}
 
-        \subsection{Sea route monitoring}
-
-            \begin{frame}{Introduction}
-                \begin{minipage}[b]{0.55\textwidth}
-                    \begin{block}<1->{Sea route monitoring}
-                        Many applications
-                        \begin{itemize}
-                            \item Traffic safety
-                            \item Surveillance operations
-                            \item Intruder detection
-                        \end{itemize}
-                    \end{block}
-                    \begin{block}<2->{Weather buoys}
-                        \begin{itemize}
-                            \item Deployed all over the world\footnotemark[1]
-                            \item Disturbed by boat's wake
-                        \end{itemize}
-                    \end{block}
-                \end{minipage}
-                \hfill
-                \begin{minipage}[b]{0.4\textwidth}
-                    \onslide<2->
-                    \begin{figure}
-                        \includegraphics[width=0.8\textwidth, trim={0, 50, 0, 50}, clip]{imgs/buoy}
-                        \caption{Weather buoy - NOAA\footnotemark[1]}
-                    \end{figure}
-                \end{minipage}
-
-                \footnotetext[1]{{\url{https://www.ndbc.noaa.gov/}}}
-            \end{frame}
+        
 
     \section{Formalism}
 
@@ -248,6 +331,37 @@
         \end{frame}
 
     \section{Application: Sea route monitoring}
+
+        \subsection{Sea route monitoring}
+
+            \begin{frame}{Introduction}
+                \begin{minipage}[b]{0.55\textwidth}
+                    \begin{block}<1->{Sea route monitoring}
+                        Many applications
+                        \begin{itemize}
+                            \item Traffic safety
+                            \item Surveillance operations
+                            \item Intruder detection
+                        \end{itemize}
+                    \end{block}
+                    \begin{block}<2->{Weather buoys}
+                        \begin{itemize}
+                            \item Deployed all over the world\footnotemark[1]
+                            \item Disturbed by boat's wake
+                        \end{itemize}
+                    \end{block}
+                \end{minipage}
+                \hfill
+                \begin{minipage}[b]{0.4\textwidth}
+                    \onslide<2->
+                    \begin{figure}
+                        \includegraphics[width=0.8\textwidth, trim={0, 50, 0, 50}, clip]{imgs/buoy}
+                        \caption{Weather buoy - NOAA\footnotemark[1]}
+                    \end{figure}
+                \end{minipage}
+
+                \footnotetext[1]{{\url{https://www.ndbc.noaa.gov/}}}
+            \end{frame}
 
         \subsection{Boat wake}
 
