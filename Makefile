@@ -65,17 +65,27 @@ $(PRESENTATION_BUILD_DIR)/acausal.mp4: $(VIDEOS_DIR)/acausal.mp4
 	cp -f $< $@
 
 # Manim
-manim: $(PRESENTATION_BUILD_DIR)/introduction.mp4 $(IMGS_BUILD_DIR)/introduction.png
+manim: $(PRESENTATION_BUILD_DIR)/introduction.mp4 $(IMGS_BUILD_DIR)/introduction.png $(PRESENTATION_BUILD_DIR)/boat.mp4 $(IMGS_BUILD_DIR)/boat.png
 
-$(PRESENTATION_BUILD_DIR)/introduction.mp4 : scripts/main.py
+$(PRESENTATION_BUILD_DIR)/introduction.mp4 : scripts/introduction.py
 	$(dir_guard)
 	manim -qh -r 1000,1000 $< introduction
-	cp -f build/manim/videos/main/1000p60/introduction.mp4 $@
+	cp -f build/manim/videos/introduction/1000p60/introduction.mp4 $@
 
-$(IMGS_BUILD_DIR)/introduction.png : scripts/main.py
+$(IMGS_BUILD_DIR)/introduction.png : scripts/introduction.py
 	$(dir_guard)
 	manim -sqh -r 1000,1000 $< introduction
-	cp -f build/manim/images/main/introduction_ManimCE_v0.15.2.png $@
+	cp -f build/manim/images/introduction/introduction_ManimCE_v0.15.2.png $@
+
+$(PRESENTATION_BUILD_DIR)/boat.mp4 : scripts/boat.py
+	$(dir_guard)
+	manim -qh -r 1000,1000 $< boat
+	cp -f build/manim/videos/boat/1000p60/boat.mp4 $@
+
+$(IMGS_BUILD_DIR)/boat.png : scripts/boat.py
+	$(dir_guard)
+	manim -sqh -r 1000,1000 -n "2,3" $< boat
+	cp -f build/manim/images/boat/boat_ManimCE_v0.15.2.png $@
 
 # Clean recipe
 clean:
