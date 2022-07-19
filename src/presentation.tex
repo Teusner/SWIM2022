@@ -116,17 +116,17 @@
             \end{frame}
 
             \begin{frame}{State estimation}
-                \begin{block}{Detection set}
-                    $\mathbb{D}_{t_j}$ is the set of compatible state with measurement at $t_j$ such that $\forall t_j \in \mathcal{T}$
+                \begin{block}{Compatible set}
+                    $\mathbb{C}_{t_j}$ is the set of compatible state with measurement at $t_j$ such that $\forall t_j \in \mathcal{T}$
                     \begin{eqnarray}
-                        \mathbb{D}_{t_j} = \{ (\mathbf{x}, t_i) \in \mathcal{S} \times \mathcal{T} \mid g(\mathbf{x}(t_i), t_i, t_j) = 0\}
+                        \mathbb{C}_{t_j} = \{ (\mathbf{x}, t_i) \in \mathcal{S} \times \mathcal{T} \mid g(\mathbf{x}(t_i), t_i, t_j) = 0\}
                     \end{eqnarray}
                 \end{block}
 
                 \begin{block}{Initial state estimation}
                     Using the \textbf{flow function}, $\mathbb{X}_0$ is the estimated state of the system
                     \begin{eqnarray}
-                        \mathbb{X}_0 = \{ \mathbf{x_0} \in \mathcal{S} \mid \exists (\mathbf{x}, t_i) \in \mathbb{D}_{t_j}, \mathbf{x_0} = \varphi(\mathbf{x}(t_i), -t_i) \}
+                        \mathbb{X}_0 = \{ \mathbf{x_0} \in \mathcal{S} \mid \exists (\mathbf{x}, t_i) \in \mathbb{C}_{t_j}, \mathbf{x_0} = \varphi(\mathbf{x}(t_i), -t_i) \}
                     \end{eqnarray}
                 \end{block}
             \end{frame}
@@ -180,6 +180,12 @@
                             (\mathbf{x}(t_i), t_i, t_j) &\mapsto sec(\alpha) \cdot |y - y_s| - v \cdot sin(\alpha) \cdot (t_j - t_i)
                         \end{aligned}
                     \end{equation}
+                \end{block}
+                \begin{block}{Detection condition}
+                    \begin{itemize}
+                        \item Wake's velocity vector aligned with boat-sensor's vector \\
+                        \item Traveled distance between boat and sensor equal to the wake's velocity times the time difference
+                    \end{itemize}
                 \end{block}
             \end{frame}
 
@@ -241,7 +247,7 @@
 
             \begin{frame}{Proposed approach}
                 \begin{block}{Proposed approach}
-                    $\forall l \in \mathbb{N}$ the number of boats, $\forall m \in \mathbb{N}$ the number of sensors, there is $d = l \times m$ detections.
+                    $\forall l \in \mathbb{N}$ the number of sub-systems, $\forall m \in \mathbb{N}$ the number of sensors, there is $d = l \times m$ detections.
                 \end{block}
                 \begin{exampleblock}{Example}
                     With $l = 5$ boats and $m = 20$ sensors,
@@ -258,8 +264,8 @@
                         \mathbb{Y}^k = \bigcup_{j \in \llbracket 1, l\rrbracket} \mathbb{Y}_j^k
                     \end{equation}
                 \end{block}
-                \begin{block}{Detection space}
-                    The detection space is a subset of $\mathbb{R}^m$, and $\mathbb{Y}$ is the detection set of all the systems such that
+                \begin{block}{Detection set}
+                    The detection set is a subset of $\mathbb{R}^m$, and $\mathbb{Y}$ is the detection set of all the systems such that
                     \begin{equation}
                         \mathbb{Y} = \mathbb{Y}^1 \times \dots \times \mathbb{Y}^m
                     \end{equation}
@@ -305,6 +311,24 @@
             \end{frame}
 
     \section{Application: Sea route monitoring}
+
+        \subsection{Formalism}
+            
+            \begin{frame}{State estimation}
+                \begin{block}{Compatible set}
+                    $\mathbb{C}$ is the set of compatible state with measurements such that
+                    \begin{eqnarray}
+                        \mathbb{C} = \{ (\mathbf{x}, t_i) \in \mathcal{S} \times \mathcal{T} \mid \forall t_j \in \mathbb{Y}, g(\mathbf{x}(t_i), t_i, t_j) = 0\}
+                    \end{eqnarray}
+                \end{block}
+
+                \begin{block}{Initial state estimation}
+                    Using the \textbf{flow function}, $\mathbb{X}_0$ is the estimated state of the system
+                    \begin{eqnarray}
+                        \mathbb{X}_0 = \{ \mathbf{x_0} \in \mathcal{S} \mid \exists (\mathbf{x}, t_i) \in \mathbb{C}, \mathbf{x_0} = \varphi(\mathbf{x}(t_i), -t_i) \}
+                    \end{eqnarray}
+                \end{block}
+            \end{frame}
 
         \subsection{Example: two sensors and three boats}
 
